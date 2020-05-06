@@ -9,9 +9,27 @@
     <link rel="stylesheet" href="css/custom.css">
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/fonts.css">
+    <script
+			  src="https://code.jquery.com/jquery-3.5.1.js"
+			  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+			  crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            const myRequest = new Request('/server');
+            fetch(myRequest)
+            .then(function(response) {
+              return response.json();
+            })
+            .then(function(myJson) {
+              $('#container').html('<p>'+myJson.pod+'</p>')
+            });
+        });
+        
+    </script>
     <!--No mires mi código, solo revisa el GitHub-->
 </head>
 <body>
        <h1>Example for Docker & K8s </h1>
+       <p id="container"></p>
 </body>
 </html>

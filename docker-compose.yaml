@@ -1,0 +1,13 @@
+version: "3"
+services: 
+  web:
+    image: rainscl/proxy:1
+    ports: 
+    - "80:80"
+    depends_on: 
+    - app
+  app:
+    image: rainscl/zch_test:1
+    ports: 
+    - 8080
+

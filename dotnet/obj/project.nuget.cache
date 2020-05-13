@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ceCL2kIU9Ywm2FC+WBjnERy2wSknnv8UCtEYFTrSLG9CSrNSx41p17xYq8ttq4nW8HCZxbNraIw05XD/RA9wqw==",
+  "dgSpecHash": "gjByEC3Lo5JRYlmHKXIkG75ySY/NPBglUIe0Eb2ejfVl9HhPiOsoEk7gw8yxn9exQCSdaJUljxM79M7AieqF0w==",
   "success": true,
-  "projectFilePath": "D:\\RainApi\\RainApi.csproj",
+  "projectFilePath": "/Users/rainscl/Desktop/ZCHTest/dotnet/RainApi.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

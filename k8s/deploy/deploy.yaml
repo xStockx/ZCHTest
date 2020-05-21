@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dep-nginx
+  labels:
+    unitbsn: BI
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 2
+  strategy:
+    type: RollingUpdate #Crea loa pods 1 a 1 / Recreate los mata y crea todos
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  minReadySeconds: 2
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            memory: "200Mi"
+          requests:
+            memory: "100Mi"
+            

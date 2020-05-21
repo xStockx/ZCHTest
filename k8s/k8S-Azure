@@ -1,0 +1,9 @@
+brew update && brew install azure-cli
+az login
+brew update && brew install python3 && brew upgrade python3
+brew link --overwrite python3
+
+
+//Conectar a AKS
+    az aks get-credentials --name DEVK8S --resource-group K8S-DEV
+    Kubectl get nodes

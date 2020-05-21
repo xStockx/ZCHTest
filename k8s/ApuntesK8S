@@ -1,0 +1,102 @@
+Pods:
+    MiAPP -> Container Image => deploy =>
+    Imperativo => Comandos
+        kubectl run nginx1 --image=nginx
+        kubectl run --generator=run-pod/v1 nginx2 --image=nginx
+        kubectl describe pod nginx2
+        kubectl exec nombrePod ls
+        kubectl exec -it nombrePod bash
+        kubectl logs nombrePod
+        kubectl logs nombrePod -f (Watch)
+        kubectl logs nombrePod  --tail=20 (20 ultima lineas)
+        kubectl create -g nombre-yaml
+        kubecet delete pod/nombrePod || kubectl delete pod pod1,pod2,pod3
+        kubectl delete pod nombrePod --grace-period=5 
+        kubectl delete pod nombrePod --now
+        kubectl delete pods --all
+        kubectl get pod/nombrePod -o yaml > pod.yaml (manifest del pod)   
+        kubectl logs pod/multicontainer -c nombrecontainer
+        
+    Labels & Selector
+        kubectl label pod multicontainer estado=prod
+        kubectl get pod multicontainer -o wide --show-labels -L estado
+        kubectl label --overwrite pod multicontainer estado=dev 
+        kubectl label pod/multicontainer estado- (borrar label)
+        kubectl get/delete pods -l estado=dev
+        kubectl get pod multicontainer -o jsonpath={.metadata.annotations}
+
+    Manfifest (YAML)(Declarativa)  (Cotiene la informacion/definición del pod y estado deseado)
+    Son un conjunto de recursos : IP, PUERTOS, HOSTNAME, SOCKETS, MEMORIA , VOLUMENES.
+    Los pods son como un contenedor se destruyen y crean siempre.
+    Ejemplo Manifest:
+    apiVersion: v1
+    kind: Pod
+    metadata:
+        name: nginx
+    spec:
+        containers:
+        -name : nginx
+        image: nginx
+Deployments:
+    Container -> Pod -> Deployment (tiene Replicaset)->
+    kubectl get deploy
+    kubectl get rs
+    kubectl scale deploy --replicas deploy/nombreDeploy
+    kubectl scale deploy -l estadolabel=valor --replicas10
+    kubectl rollout history deploy nombreDeploy #muestra las rev de los deploy.
+
+    Manifiesto
+
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+        name: dep-nginx
+        labels:
+            unitbsn: BI
+        spec:
+        selector:
+            matchLabels:
+            app: nginx
+        replicas: 2
+        strategy:
+            type: RollingUpdate
+        template:
+            metadata:
+            labels:
+                app: nginx
+            spec:
+            containers:
+            - name: nginx
+                image: nginx
+                ports:
+                - containerPort: 80
+                resources:
+                limits:
+                    memory: "200Mi"
+                requests:
+                    memory: "100Mi"
+
+Servicios:
+    kubectl expose deployment nombreDeploy --name=nombreServicio --target-port=80 --type=NodePort
+    apiVersion: v1
+    kind: Service
+    metadata:
+    name: web-svc
+    spec:
+    selector:
+        app: website
+    ports:
+    - port: 3000
+        targetPort: 3002
+
+Describe:
+    kubectl describe nodes 
+    kubectl describe pods
+
+  
+Secrets:
+    kubectl get secret dashboard-admin-sa-token-nr4gx -o json | jq -r .data.token | base64 -d
+
+Metric-server
+    kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.3.6/components.yaml
+    kubectl top pods

@@ -92,7 +92,27 @@ Servicios:
 Describe:
     kubectl describe nodes 
     kubectl describe pods
+    kubectl describe svc
+    kubectl describe node
 
+
+Replicaset & Rollout
+    kubectl describe rs
+    kubectl rollout history deploy nombreDeploy
+    kubectl rollout status deploy nombreDeploy
+    kubectl rollout history deploy nombreDeploy --revision=3
+    kubectl rollout undo deployment nombredeploy --to-revision=3
+
+NameSpace
+    kubectl get namespace 
+    kubectl get ns 
+    kubectl get ns nombrens
+    kubectl describe ns nombrens
+    ex:
+        kubectl get pods -n nombrens
+    kubectl apply -f manifest.yaml --namespace nombrens
+Volumenes:
+    
   
 Secrets:
     kubectl get secret dashboard-admin-sa-token-nr4gx -o json | jq -r .data.token | base64 -d
@@ -100,3 +120,4 @@ Secrets:
 Metric-server
     kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.3.6/components.yaml
     kubectl top pods
+

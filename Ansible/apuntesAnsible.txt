@@ -1,0 +1,8 @@
+Ansible
+
+    - Necesidad de automatizar
+    - Plataforma existente
+    - No confiar en la automatización
+    - Bajar/mejorar tiempos de respuesta
+    - PDCA
+     

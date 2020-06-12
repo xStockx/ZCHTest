@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: t1.rains.cl
+    http:
+      paths:
+      - backend:
+          serviceName: website
+          servicePort: 3000
+  - host: t2.rains.cl
+    http:
+      paths:
+      - backend:
+          serviceName: webui
+          servicePort: 80
